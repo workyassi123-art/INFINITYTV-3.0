@@ -26,7 +26,7 @@ export default function ContactInfoCards() {
             </svg>
           </div>
           <h3>Email</h3>
-          <p className="ccard-emph">contact@monsite.com</p>
+          <p className="ccard-emph">infinitytv.cont@hotmail.com</p>
         </a>
 
         {/* Instagram (replaces 'Notre bureau') */}
