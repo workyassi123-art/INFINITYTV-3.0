@@ -7,12 +7,15 @@ export default function Navbar() {
         {/* Brand */}
         <div className="brand">
           <Link to="/" className="brand-logo-wrap" aria-label="INFINITY TV — Home">
-            <img
-              className="brand-logo"
-              src="/logo.png"
-              srcSet="/LLOGO.png 1x, /logo@2x.png 2x"  /* retina optional */
-              alt="INFINITY TV"
-            />
+           <img
+            className="brand-logo"
+           src="/logo-mobile.png"   // /public/logo-mobile.png
+           width="120"
+           height="24"
+           alt="INFINITY TV"
+           loading="eager"
+           decoding="async"
+    />
           </Link>
         </div>
 
