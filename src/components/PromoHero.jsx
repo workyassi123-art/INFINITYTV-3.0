@@ -20,7 +20,7 @@ export default function PromoHero() {
           <p className="promo-text">
             Tired of IPTV subscriptions that promise the world but leave you
             disappointed? With Infinity TV, say goodbye to interruptions,
-            unavailable channels, and mediocre picture quality. With 15 years of
+            unavailable channels, and mediocre picture quality. With 8 years of
             experience, we deliver a stable, reliable IPTV experience, backed by
             high-bandwidth servers and robust hardware.
           </p>
