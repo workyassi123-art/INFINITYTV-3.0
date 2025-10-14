@@ -82,11 +82,13 @@ function Home() {
       <TestimonialsSwipe
         images={[
           "/client1.png",
+          "/client5.png",
           "/client4.png",
           "/client3.png",
           "/client2.png",
           "/client1.png",
           "/client4.png",
+          "/client5.png",
         ]}
       />
     </>
