@@ -1,81 +1,94 @@
-/* ========== NAVBAR — PHONE ONLY ========== */
-@media (max-width: 767px) {
-  /* barre supérieure (aspect violet + blur comme sur le site) */
+/* --- PHONE OVERRIDES --- */
+@media (max-width: 900px) {
+  /* Fixed, glossy bar + iOS stability */
   .nav.nav-purple {
-    position: sticky;
-    top: 0;
+    position: fixed;
+    top: 0; left: 0; right: 0;
     z-index: 1000;
-    background: rgba(20, 16, 52, .9); /* violet */
+    background: rgba(20,16,52,.92);
     -webkit-backdrop-filter: saturate(180%) blur(10px);
     backdrop-filter: saturate(180%) blur(10px);
     border-bottom: 1px solid rgba(255,255,255,.08);
+
+    isolation: isolate;                  /* prevent blending glitches */
+    -webkit-transform: translateZ(0);    /* own GPU layer */
+    transform: translateZ(0);
+    backface-visibility: hidden;
   }
 
-  /* wrapper: hauteur + safe-area pour iPhone */
+  /* Push content below fixed bar */
+  body { padding-top: calc(50px + env(safe-area-inset-top)); }
+
+  /* Top row layout, with reserved space for the hamburger */
   .nav-wrap {
-    height: calc(56px + env(safe-area-inset-top));
-    padding: calc(8px + env(safe-area-inset-top)) 14px 8px;
+    position: relative;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    height: calc(50px + env(safe-area-inset-top));
+    padding: calc(8px + env(safe-area-inset-top)) 14px 6px;
+    padding-right: 44px; /* reserve right-side space for the toggle */
   }
 
-  /* logo */
+  /* Hide desktop menu on phone */
+  .nav.nav-purple .menu { display: none !important; }
+
+  /* Logo (small) + anti-flicker */
+  .brand { display: flex; align-items: center; overflow: visible; }
+  .brand-logo-wrap { overflow: visible; }
   .brand-logo {
-    height: 28px;
-    width: auto;
     display: block;
+    height: 40px !important;     /* tweak 18–22px to preference */
+    width: auto;
+    position: relative;
+    z-index: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    will-change: transform;
+    image-rendering: -webkit-optimize-contrast;
   }
 
-  /* on cache le menu desktop */
-  .nav .menu {
-    display: none;
-  }
-
-  /* --- HAMBURGER --- */
+  /* Hamburger pinned INSIDE the bar on the right */
   .nav-toggle {
-    display: inline-flex;
+    position: absolute;
+    right: 12px;                 /* adjust spacing from edge */
+    top: 50%;
+    transform: translateY(-50%);
+    display: inline-flex !important;
     flex-direction: column;
     gap: 4px;
     appearance: none;
     background: transparent;
     border: 0;
-    padding: 8px;
-    margin: -8px; /* agrandit la zone de clic sans bouger le layout */
+    padding: 10px;               /* comfortable tap target */
+    margin: 0;
     cursor: pointer;
   }
   .nav-toggle span {
-    width: 24px;
-    height: 2px;
+    width: 26px; height: 2px;
     background: #fff;
     border-radius: 2px;
     display: block;
   }
 
-  /* --- BACKDROP --- */
+  /* Backdrop */
   .nav-backdrop {
-    position: fixed;
-    inset: 0;
-    background: rgba(0, 0, 0, .45);
-    opacity: 0;
-    pointer-events: none;
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.45);
+    opacity: 0; pointer-events: none;
     transition: opacity .25s ease;
   }
 
-  /* --- DRAWER (menu latéral) --- */
+  /* Drawer */
   .nav-drawer {
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100dvh;                       /* correct sur iOS */
+    position: fixed; top: 0; right: 0;
+    height: 100dvh;
     width: min(86vw, 360px);
-    transform: translate3d(100%, 0, 0);   /* hors écran par défaut */
+    transform: translate3d(100%,0,0);
     transition: transform .28s ease;
-    background: rgba(20, 16, 52, .96);    /* même violet, plus opaque */
+    background: rgba(20,16,52,.96);
     -webkit-backdrop-filter: saturate(180%) blur(14px);
     backdrop-filter: saturate(180%) blur(14px);
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column;
     padding-top: calc(14px + env(safe-area-inset-top));
   }
 
@@ -88,49 +101,27 @@
     text-decoration: none;
     font-weight: 600;
   }
-  .nav-drawer a.active {
-    background: rgba(255, 255, 255, .12);
-  }
-
-  /* boutons dans le drawer */
-  .nav-drawer .btn {
-    text-align: center;
-    margin: 6px 10px;
-  }
+  .nav-drawer a.active { background: rgba(255,255,255,.12); }
+  .nav-drawer .btn { text-align: center; margin: 6px 10px; }
   .nav-drawer .btn.ghost {
     background: transparent;
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, .2);
+    border: 1px solid rgba(255,255,255,.2);
   }
 
-  /* espace bas pour l’indicateur d’accueil iPhone */
-  .drawer-safe {
-    height: env(safe-area-inset-bottom);
-  }
+  .drawer-safe { height: env(safe-area-inset-bottom); }
 
-  /* état ouvert (on ajoute .is-open sur <header>) */
-  .nav.is-open .nav-drawer {
-    transform: translate3d(0, 0, 0);
-  }
-  .nav.is-open .nav-backdrop {
-    opacity: 1;
-    pointer-events: auto;
-  }
+  /* Open state */
+  .nav.nav-purple.is-open .nav-drawer { transform: translate3d(0,0,0); }
+  .nav.nav-purple.is-open .nav-backdrop { opacity: 1; pointer-events: auto; }
 }
 
-/* sécurité: masquer les éléments mobile en desktop */
-@media (min-width: 768px) {
-  .nav-toggle,
-  .nav-backdrop,
-  .nav-drawer {
-    display: none;
-  }
+/* Desktop safety */
+@media (min-width: 901px) {
+  .nav-toggle, .nav-backdrop, .nav-drawer { display: none !important; }
 }
 
-/* accessibilité: réduit les animations si nécessaire */
+/* Motion safety */
 @media (prefers-reduced-motion: reduce) {
-  .nav-backdrop,
-  .nav-drawer {
-    transition: none;
-  }
+  .nav-backdrop, .nav-drawer { transition: none; }
 }
