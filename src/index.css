@@ -1908,78 +1908,7 @@ img { max-width: 100%; height: auto; }
   .contact-hero-title {
     font-size: 1.75rem;
   }
-  /* Only phones */
-@media (max-width: 767px) {
-  /* make the bar fixed & glossy like your site */
-  .nav.nav-purple {
-    position: sticky; /* sticky first */
-    top: 0;
-    z-index: 1000;
-    background: rgba(20, 16, 52, .9);            /* your purple */
-    -webkit-backdrop-filter: saturate(180%) blur(10px);
-    backdrop-filter: saturate(180%) blur(10px);
-    border-bottom: 1px solid rgba(255,255,255,.08);
-  }
-
-  /* layout */
-  .nav-wrap {
-    height: calc(56px + env(safe-area-inset-top));
-    padding: calc(8px + env(safe-area-inset-top)) 14px 8px;
-    display: flex; align-items: center; justify-content: space-between;
-  }
-
-  .brand-logo { height: 28px; width: auto; display:block; }
-
-  /* hide desktop menu inline; we'll use a drawer */
-  .nav .menu { display: none; }
-
-  /* hamburger */
-  .nav-toggle {
-    display: inline-flex; flex-direction: column; gap: 4px;
-    appearance: none; background: transparent; border: 0; padding: 8px; margin: -8px;
-  }
-  .nav-toggle span { width: 24px; height: 2px; background: #fff; border-radius: 2px; display: block; }
-
-  /* backdrop */
-  .nav-backdrop {
-    position: fixed; inset: 0; background: rgba(0,0,0,.45);
-    opacity: 0; pointer-events: none; transition: opacity .25s ease;
-  }
-
-  /* drawer (right side) */
-  .nav-drawer {
-    position: fixed; top: 0; right: 0;
-    height: 100dvh; width: min(86vw, 360px);
-    transform: translate3d(100%,0,0);
-    transition: transform .28s ease;
-    background: rgba(20, 16, 52, .96); /* same purple but more solid */
-    -webkit-backdrop-filter: saturate(180%) blur(14px);
-    backdrop-filter: saturate(180%) blur(14px);
-    display: flex; flex-direction: column; padding-top: calc(14px + env(safe-area-inset-top));
-  }
-
-  .nav-drawer a {
-    color: #fff; text-decoration: none; font-weight: 600;
-    padding: 14px 16px; border-radius: 12px; margin: 4px 10px;
-    display: block;
-  }
-  .nav-drawer a.active { background: rgba(255,255,255,.12); }
-
-  .nav-drawer .btn { text-align: center; margin: 6px 10px; }
-  .nav-drawer .btn.ghost { border: 1px solid rgba(255,255,255,.2); background: transparent; color: #fff; }
-
-  .drawer-safe { height: env(safe-area-inset-bottom); }
-
-  /* open state */
-  .nav.is-open .nav-drawer { transform: translate3d(0,0,0); }
-  .nav.is-open .nav-backdrop { opacity: 1; pointer-events: auto; }
-}
-
-/* Desktop unchanged (optional: ensure hamburger hidden there) */
-@media (min-width: 768px) {
-  .nav-toggle, .nav-backdrop, .nav-drawer { display: none; }
-}
-
+  
   .status-message {
     text-align: center;
   }
